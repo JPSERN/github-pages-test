@@ -1,0 +1,30 @@
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>value属性のデフォルト値検証ページ</title>
+  <script type="text/html" id="tpl-li">
+    <li>
+      <span>type={%type%}: </span><input type="{%type%}">
+    </li>
+  </script>
+  <script>
+    //対象の type 属性値
+    const types = [
+      "submit", "reset", "button"
+    ];
+
+    //types 配列の要素分だけ input タグを生成する
+    document.addEventListener("DOMContentLoaded", function(event){
+      const inputs = document.getElementById("inputs");
+      types.forEach(function(value){
+        const tpl = document.getElementById("tpl-li").innerHTML;
+        inputs.innerHTML += tpl.split("{%type%}").join(value);
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>value属性のデフォルト値検証用HTML</h1>
+  <ul id="inputs"></ul>
+</body>
+</html>
