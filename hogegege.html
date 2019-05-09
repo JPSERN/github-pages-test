@@ -2,9 +2,82 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>hogegege</title>
+  <title>なんかページをつくってみるだけのテスト</title>
+  <!--▼▼ bootstrap ▼▼-->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!--▲▲ bootstrap ▲▲-->
+
+  <style>
+    body {
+      font-size: 1.5em;
+    }
+    #trigger {
+      display: block;
+      height: 124px;
+      margin-bottom: 1em;
+      font-size: inherit;
+    }
+    #message-box {
+      width: 500px;
+      border: solid 1px #CCC;
+      padding: 1rem;
+    }
+    .message {
+      display: block;
+    }
+    #next:hover {
+      cursor: pointer;
+      color: blue;
+      text-decoration-line: underline;
+    }
+    #last {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    ((d) => {
+      d.addEventListener("DOMContentLoaded", (e) => {
+        const messageBox = d.getElementById("message-box");
+        d.getElementById("trigger").addEventListener("click", (e) => {
+          const next = createP("ん？いまなんでもするって言ったよね？");
+          next.id = "next";
+          messageBox.appendChild(next);
+        }, {
+          once: true
+        });
+        messageBox.addEventListener("click", (e) => {
+          if(e.target.id === "next") {
+            const f = () => {
+              const last = createP("なんでもするとは言ってない。");
+              last.id = "last";
+              messageBox.appendChild(last);
+            };
+            f();
+            messageBox.removeEventListener("click", f, false);
+          }
+        });
+      });
+
+      const createP = (x) => {
+        const p = d.createElement("p");
+        p.textContent = x;
+        p.classList.add("message");
+        return p;
+      };
+    })(document);
+  </script>
 </head>
 <body>
-  <input type="button" value="押してくださいなんでもしますから" onclick='alert("なんでもするとは言ってない")' style="height:120px; font-size:24px;">
+  <h1>テストページ</h1>
+　<section>
+    <h2>どうぞ</h2>
+    <button id="trigger">押してくださいなんでもしますから</button>
+  </section>
+  <section>
+    <h2>メッセージ</h2>
+    <div id="message-box"></div>
+  </section>
 </body>
 </html>
